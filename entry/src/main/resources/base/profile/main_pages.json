@@ -1,6 +1,8 @@
 {
   "src": [
+    "pages/LaunchPage",
     "pages/Index",
-    "pages/Second"
+    "pages/Second",
+    "pages/mine/AnimateFish"
   ]
 }

@@ -1,12 +1,64 @@
 
+// @Component
+// class TestC {
+//   obj1:number = 0
+//   obj2:number = 0
+// }
+
 @Component
 export struct Home {
 
+  @State imageWidth:number = 50;
+  //The '@Prop' decorated attribute 't' must be of the string, number, or boolean type. <etsLint>
+  //@Prop t:TestC
+
+  @Styles card() {
+    .width('95%')
+    .padding(20)
+    .backgroundColor(Color.White)
+    .borderRadius(15)
+    .shadow({radius: 5, color: '#1F000000', offsetX: 2, offsetY: 4})
+  }
+
   build() {
-    Stack() {
-      Button("home")
+    Column() {
+      Row() {
+        Button() {
+          Image($r('app.media.icon'))
+            .width(this.imageWidth)
+            .interpolation(ImageInterpolation.Low)
+        }
         .onClick(()=> {
           console.log("home");
+        })
+      }
+      .height(400)
+
+      Row() {
+        Text('图片宽度')
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+          .width('30%')
+          .backgroundColor(Color.White)
+        TextInput({placeholder:'输入图片宽度10-300', text:this.imageWidth.toFixed(0)})
+          .backgroundColor(Color.White)
+          .width('50%')
+      }
+      .justifyContent(FlexAlign.SpaceAround)
+      .card()
+
+      Slider({
+        min:10,
+        max:300,
+        value:this.imageWidth,
+        step:10
+      })
+        .trackThickness(8) // 滑块粗细
+        .blockColor('#36D')
+        .width('90%')
+        .showTips(true)
+        .onChange((value:number) => {
+          this.imageWidth = value
         })
     }
     .width('100%')
