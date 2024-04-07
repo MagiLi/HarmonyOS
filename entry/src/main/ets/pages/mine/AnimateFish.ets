@@ -7,7 +7,7 @@ struct AnimateFish {
   @State fishX: number = 200;
   @State fishY: number = 100;
   @State angle: number = 0;
-  @State src: Resource = $r('app.media.icon')
+  @State src: Resource = $r('app.media.emoji_smile')
   // 是否开始动画
   @State isBegin: boolean = false;
 
@@ -53,6 +53,9 @@ struct AnimateFish {
           })
       } else {
         Image(this.src)
+          // .objectFit(ImageFit.ScaleDown)
+          // .backgroundColor(Color.Red)
+          //.borderRadius(20)
           .position({x: this.fishX - 20, y: this.fishY - 20})
           .rotate({angle: this.angle, centerX: '50%', centerY: '50%'})
           .width(40)
@@ -62,6 +65,7 @@ struct AnimateFish {
             opacity: 0,
             translate: {x: -250}
           })
+          .interpolation(ImageInterpolation.Low)
       }
 
       Row() {
@@ -95,6 +99,7 @@ struct AnimateFish {
           () => {
             this.positionX = this.centerX;
             this.positionY = this.centerY;
+            this.angle = 0;
           })
 
         break;
@@ -131,9 +136,17 @@ struct AnimateFish {
             this.positionY = this.centerY + distance * this.sin;
 
             // 修改小鱼的角度 弧度 -> 角度
+            if (Math.abs(angle * 2) < Math.PI) {
+              // (-90, 90)
+              //this.src = $r("app.media.emoji_smile")
+            } else {
+              // (-180, -90] [90, 180]
+              //this.src = $r("app.media.emoji_smile")
+              angle = angle < 0 ? angle + Math.PI : angle - Math.PI
+            }
             this.angle = angle * 180 / Math.PI
             // 设置小鱼的速度
-            this.speed = 10
+            this.speed = 5
           })
 
         break;
