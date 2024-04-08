@@ -3,6 +3,8 @@
     "pages/LaunchPage",
     "pages/Index",
     "pages/Second",
-    "pages/mine/AnimateFish"
+    "pages/mine/AnimateFish",
+    "pages/DocumentListPage",
+    "pages/DocumentPage"
   ]
 }

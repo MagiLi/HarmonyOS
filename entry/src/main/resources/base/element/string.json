@@ -19,6 +19,22 @@
     {
       "name": "tab_home",
       "value": "首页"
+    },
+    {
+      "name": "DocAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "DocAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "DocumentAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "DocumentAbility_label",
+      "value": "label"
     }
   ]
 }

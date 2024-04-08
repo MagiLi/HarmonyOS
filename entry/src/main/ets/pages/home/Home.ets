@@ -1,4 +1,4 @@
-
+import router from '@ohos.router';
 // @Component
 // class TestC {
 //   obj1:number = 0
@@ -7,8 +7,7 @@
 
 @Component
 export struct Home {
-
-  @State imageWidth:number = 50;
+  @State imageWidth: number = 50;
   //The '@Prop' decorated attribute 't' must be of the string, number, or boolean type. <etsLint>
   //@Prop t:TestC
 
@@ -17,7 +16,7 @@ export struct Home {
     .padding(20)
     .backgroundColor(Color.White)
     .borderRadius(15)
-    .shadow({radius: 5, color: '#1F000000', offsetX: 2, offsetY: 4})
+    .shadow({ radius: 5, color: '#1F000000', offsetX: 2, offsetY: 4 })
   }
 
   build() {
@@ -28,7 +27,7 @@ export struct Home {
             .width(this.imageWidth)
             .interpolation(ImageInterpolation.Low)
         }
-        .onClick(()=> {
+        .onClick(() => {
           console.log("home");
         })
       }
@@ -40,7 +39,7 @@ export struct Home {
           .fontWeight(FontWeight.Bold)
           .width('30%')
           .backgroundColor(Color.White)
-        TextInput({placeholder:'输入图片宽度10-300', text:this.imageWidth.toFixed(0)})
+        TextInput({ placeholder: '输入图片宽度10-300', text: this.imageWidth.toFixed(0) })
           .backgroundColor(Color.White)
           .width('50%')
       }
@@ -48,22 +47,34 @@ export struct Home {
       .card()
 
       Slider({
-        min:10,
-        max:300,
-        value:this.imageWidth,
-        step:10
+        min: 10,
+        max: 300,
+        value: this.imageWidth,
+        step: 10
       })
         .trackThickness(8) // 滑块粗细
         .blockColor('#36D')
         .width('90%')
         .showTips(true)
-        .onChange((value:number) => {
+        .onChange((value: number) => {
           this.imageWidth = value
         })
+      Button('文档列表')
+        .onClick(() => {
+          console.log('文档列表')
+          router.pushUrl({
+            url: 'pages/DocumentListPage'
+          }, router.RouterMode.Single, (error) => {
+            if (error) {
+              console.log('跳转DocumentListPage页面报错:' + error.code.toFixed(0) + error.message)
+            }
+          })
+        })
+        .width(150)
+        .height(50)
     }
     .width('100%')
     .height('100%')
     .backgroundColor('#ff08a8f1')
   }
-
 }

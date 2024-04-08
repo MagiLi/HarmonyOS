@@ -25,15 +25,15 @@ struct LaunchPage {
         console.log("展示启动页");
         animateTo({duration:1000, curve:curves.cubicBezierCurve(0.4, 0, 1, 1), delay:100, onFinish:()=>{
           setTimeout(()=>{
-            // router.replaceUrl({
-            //   url:'pages/Index'
-            // }, router.RouterMode.Standard, (error)=>{
-            //   if (error) {
-            //     console.log('跳转到Index页面error:${error.code}');
-            //   } else {
-            //     console.log('跳转到Index页面成功');
-            //   }
-            // })
+            router.replaceUrl({
+              url:'pages/Index'
+            }, router.RouterMode.Standard, (error)=>{
+              if (error) {
+                console.log('跳转到Index页面error:${error.code}');
+              } else {
+                console.log('跳转到Index页面成功');
+              }
+            })
           }, 1000)
         }}, ()=> {
           this.currentOpacity = 1.0;
