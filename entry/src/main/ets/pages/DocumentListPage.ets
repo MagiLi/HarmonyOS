@@ -41,7 +41,7 @@ struct DocumentListPage {
             Image($r('app.media.emoji_smile'))
               .width(20)
               .height(20)
-            Text('文档${id}')
+            Text(`文档${id}`)
               .fontSize(18)
               .fontColor(Color.Red)
               .onClick(() => {

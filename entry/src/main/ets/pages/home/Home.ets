@@ -1,4 +1,6 @@
 import router from '@ohos.router';
+import axios from '@ohos/axios';
+
 // @Component
 // class TestC {
 //   obj1:number = 0
@@ -29,6 +31,13 @@ export struct Home {
         }
         .onClick(() => {
           console.log("home");
+          this.requestData()
+            .then((data)=>{
+
+            })
+            .catch((error)=>{
+              
+            })
         })
       }
       .height(400)
@@ -66,7 +75,7 @@ export struct Home {
             url: 'pages/DocumentListPage'
           }, router.RouterMode.Single, (error) => {
             if (error) {
-              console.log('跳转DocumentListPage页面报错:' + error.code.toFixed(0) + error.message)
+              console.log(`跳转DocumentListPage页面报错:${error.code.toFixed(0)}_${error.message}`)
             }
           })
         })
@@ -76,5 +85,30 @@ export struct Home {
     .width('100%')
     .height('100%')
     .backgroundColor('#ff08a8f1')
+  }
+
+  requestData(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      axios.get(
+        'http://sss',
+        {
+          params: { 'param1': '' },
+          data: { 'param1': '' }
+        }
+      )
+        .then(resp => {
+          if (resp.status === 200) {
+            console.log(JSON.stringify(resp.data))
+            //resp.data
+            resolve(resp.data)
+          } else {
+            reject('')
+          }
+        })
+        .catch(error => {
+          console.log('error:', JSON.stringify(error))
+          reject(error)
+        })
+    })
   }
 }
