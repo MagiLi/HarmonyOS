@@ -2,6 +2,7 @@ import UIAbility from '@ohos.app.ability.UIAbility';
 import hilog from '@ohos.hilog';
 import window from '@ohos.window';
 import PreferencesUtil from '../common/util/PreferencesUtil'
+import TaskModel from '../model/TaskModel'
 
 export default class EntryAbility extends UIAbility {
   async onCreate(want, launchParam) {
@@ -10,6 +11,8 @@ export default class EntryAbility extends UIAbility {
     // 加载Preferences
     PreferencesUtil.loadPreference(this.context, 'MyPreferences')
     await PreferencesUtil.loadPreference(this.context, 'MyPreferences')
+    // 初始化任务表
+    TaskModel.initTaskDB(this.context)
   }
 
   onDestroy() {

@@ -53,8 +53,36 @@ class  TaskModel {
       // finished两次取反 由number变成boolean
       tasks.push({id, name, finished: !!finished})
     }
+    console.log('testTag', '查询到数据：', JSON.stringify(tasks))
+    return tasks
   }
 
+  /*
+   * 添加一个任务
+   * return 任务id
+   */
+  addTask(name:string):Promise<number> {
+    return this.rdbStore.insert(this.tableName, {name, finished: false})
+  }
+
+  /*
+   * 根据id更新任务
+   */
+  updateTaskStatus(id:number, finished:boolean) {
+    let data = {finished}
+    let predicates = new relationalStore.RdbPredicates(this.tableName)
+    predicates.equalTo('ID', id)
+    return this.rdbStore.update(data, predicates)
+  }
+
+  /*
+   * 根据id删除任务
+   */
+  deleteTaskById(id:number) {
+    let predicates = new relationalStore.RdbPredicates(this.tableName)
+    predicates.equalTo('ID', id)
+    return this.rdbStore.delete(predicates)
+  }
 }
 let taskModel = new TaskModel();
 
